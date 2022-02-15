@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <vector>
-
+#include <math.h>
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 // Variables			                                                     //
