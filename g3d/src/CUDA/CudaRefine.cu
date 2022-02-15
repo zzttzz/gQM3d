@@ -281,7 +281,7 @@ void GPU_Refine_3D(
 		-1,
 		1, // debug
 		true,
-		true
+		false
 	);
 
 	// stop timer

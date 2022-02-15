@@ -8542,9 +8542,11 @@ __global__ void kernelConnectNewTetNeighbors(
 
 	// Check neighbor
 	newtet = d_cavebdrylist[pos];
+	/*
 	for (j = 0; j < 4; j++)
 	{
 		newtet.ver = j;
+		printf("Debug(%d): %d\n",4 * neightet.id + (neightet.ver & 3));
 		neightet = d_neighborlist[4 * newtet.id + (newtet.ver & 3)];
 		if (d_neighborlist[4 * neightet.id + (neightet.ver & 3)].id != newtet.id)
 		printf("Wrong neighbor(%d): Tet#%d - %d, %d, %d, %d, Tet#%d - %d, %d, %d, %d\n",
@@ -8555,7 +8557,9 @@ __global__ void kernelConnectNewTetNeighbors(
 		neightet.id,
 		d_neighborlist[4 * neightet.id + 0].id, d_neighborlist[4 * neightet.id + 1].id,
 		d_neighborlist[4 * neightet.id + 2].id, d_neighborlist[4 * neightet.id + 3].id);
+		printf("Debug(%d): %d Done\n",4 * neightet.id + (neightet.ver & 3));
 	}
+	*/
 }
 
 __global__ void kernelConnectBoundarySubfaces2NewTets(
