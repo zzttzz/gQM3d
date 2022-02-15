@@ -27,8 +27,8 @@ void outputStartingFrame(
 	int numberoftet = t_tetstatus.size();
 	drawmesh->tetlist = new int[4 * numberoftet];
 	cudaMemcpy(drawmesh->tetlist, thrust::raw_pointer_cast(&t_tetlist[0]), 4 * numberoftet * sizeof(int), cudaMemcpyDeviceToHost);
-	drawmesh->tetstatus = new tetstatus[numberoftet];
-	cudaMemcpy(drawmesh->tetstatus, thrust::raw_pointer_cast(&t_tetstatus[0]), numberoftet * sizeof(tetstatus), cudaMemcpyDeviceToHost);
+	drawmesh->m_tetstatus = new tetstatus[numberoftet];
+	cudaMemcpy(drawmesh->m_tetstatus, thrust::raw_pointer_cast(&t_tetstatus[0]), numberoftet * sizeof(tetstatus), cudaMemcpyDeviceToHost);
 
 	int numberofthreads = t_threadlist.size();
 	drawmesh->threadlist = new int[numberofthreads];
@@ -69,7 +69,7 @@ void outputStartingFrame(
 		int numberoftriface = 0;
 		for (int i = 0; i < numberoftet; i++)
 		{
-			if (!drawmesh->tetstatus[i].isEmpty())
+			if (!drawmesh->m_tetstatus[i].isEmpty())
 				numberoftriface += 4;
 		}
 		numberoftriface += 4 * numberofthreads;
@@ -77,7 +77,7 @@ void outputStartingFrame(
 		fprintf(fp, "%d\n", numberoftriface);
 		for (int i = 0; i < numberoftet; i++)
 		{
-			if (!drawmesh->tetstatus[i].isEmpty())
+			if (!drawmesh->m_tetstatus[i].isEmpty())
 			{
 				for (int j = 0; j < 4; j++)
 					fprintf(fp, "%d %d %d 1\n", drawmesh->tetlist[4 * i + (j + 1) % 4] + 1,
@@ -99,7 +99,7 @@ void outputStartingFrame(
 		fprintf(fp, "%d\n", numberoftet);
 		for (int i = 0; i < numberoftet; i++)
 		{
-			if (!drawmesh->tetstatus[i].isEmpty())
+			if (!drawmesh->m_tetstatus[i].isEmpty())
 				fprintf(fp, "%d %d %d %d 1\n", drawmesh->tetlist[4 * i + 0] + 1, drawmesh->tetlist[4 * i + 1] + 1,
 					drawmesh->tetlist[4 * i + 2] + 1, drawmesh->tetlist[4 * i + 3] + 1);
 		}
@@ -277,7 +277,7 @@ void outputStartingFrame(
 	// Clear memory
 	delete[] drawmesh->pointlist;
 	delete[] drawmesh->tetlist;
-	delete[] drawmesh->tetstatus;
+	delete[] drawmesh->m_tetstatus;
 	delete[] drawmesh->threadlist;
 	delete[] drawmesh->insertidxlist;
 }
@@ -471,8 +471,8 @@ void outputCavityFrame(
 	drawmesh->numofsubface = numofsubface;
 	drawmesh->trifacelist = new int[3 * numofsubface];
 	cudaMemcpy(drawmesh->trifacelist, thrust::raw_pointer_cast(&t_trifacelist[0]), 3 * numofsubface * sizeof(int), cudaMemcpyDeviceToHost);
-	drawmesh->tristatus = new tristatus[numofsubface];
-	cudaMemcpy(drawmesh->tristatus, thrust::raw_pointer_cast(&t_tristatus[0]), numofsubface * sizeof(tristatus), cudaMemcpyDeviceToHost);
+	drawmesh->m_tristatus = new tristatus[numofsubface];
+	cudaMemcpy(drawmesh->m_tristatus, thrust::raw_pointer_cast(&t_tristatus[0]), numofsubface * sizeof(tristatus), cudaMemcpyDeviceToHost);
 	drawmesh->tri2tetlist = new tethandle[2 * numofsubface];
 	cudaMemcpy(drawmesh->tri2tetlist, thrust::raw_pointer_cast(&t_tri2tetlist[0]), 2 * numofsubface * sizeof(tethandle), cudaMemcpyDeviceToHost);
 
@@ -546,7 +546,7 @@ void outputCavityFrame(
 		int numberoftriface = 4 * numoftet;
 		for (int i = 0; i < numofsubface; i++)
 		{
-			if (!drawmesh->tristatus[i].isEmpty())
+			if (!drawmesh->m_tristatus[i].isEmpty())
 			{
 				numofttcs++;
 				trihandle checksh(i, 0);
@@ -588,7 +588,7 @@ void outputCavityFrame(
 		}
 		for (int i = 0; i < numofsubface; i++)
 		{
-			if (!drawmesh->tristatus[i].isEmpty())
+			if (!drawmesh->m_tristatus[i].isEmpty())
 			{
 				trihandle checksh(i, 0);
 				tethandle checktet;
@@ -690,15 +690,15 @@ void outputTmpMesh(
 	drawmesh->numofsubface = numofsubface;
 	drawmesh->trifacelist = new int[3 * numofsubface];
 	cudaMemcpy(drawmesh->trifacelist, thrust::raw_pointer_cast(&t_trifacelist[0]), 3 * numofsubface * sizeof(int), cudaMemcpyDeviceToHost);
-	drawmesh->tristatus = new tristatus[numofsubface];
-	cudaMemcpy(drawmesh->tristatus, thrust::raw_pointer_cast(&t_tristatus[0]), numofsubface * sizeof(tristatus), cudaMemcpyDeviceToHost);
+	drawmesh->m_tristatus = new tristatus[numofsubface];
+	cudaMemcpy(drawmesh->m_tristatus, thrust::raw_pointer_cast(&t_tristatus[0]), numofsubface * sizeof(tristatus), cudaMemcpyDeviceToHost);
 
 	int numoftet = t_tetstatus.size();
 	drawmesh->numoftet = numoftet;
 	drawmesh->tetlist = new int[4 * numoftet];
 	cudaMemcpy(drawmesh->tetlist, thrust::raw_pointer_cast(&t_tetlist[0]), 4 * numoftet * sizeof(int), cudaMemcpyDeviceToHost);
-	drawmesh->tetstatus = new tetstatus[numoftet];
-	cudaMemcpy(drawmesh->tetstatus, thrust::raw_pointer_cast(&t_tetstatus[0]), numoftet * sizeof(tetstatus), cudaMemcpyDeviceToHost);
+	drawmesh->m_tetstatus = new tetstatus[numoftet];
+	cudaMemcpy(drawmesh->m_tetstatus, thrust::raw_pointer_cast(&t_tetstatus[0]), numoftet * sizeof(tetstatus), cudaMemcpyDeviceToHost);
 
 	// cavity
 	int numberofthreads = t_threadlist.size();

@@ -279,9 +279,9 @@ void GPU_Refine_3D(
 		input_behavior,
 		-1,
 		-1,
-		0,
-		false,
-		false
+		1, // debug
+		true,
+		true
 	);
 
 	// stop timer
@@ -299,7 +299,6 @@ void GPU_Refine_3D(
 		if (drawmesh->iter_seg != -1 && drawmesh->iter_subface == -1 && drawmesh->iter_tet == -1)
 			return;
 	}
-
 	/******************************************/
 	/* 3. Split encroached subfaces		      */
 	/******************************************/

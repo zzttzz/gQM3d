@@ -309,13 +309,13 @@ typedef struct internalmesh
 	tristatus* segstatus;
 	int numofsubface;
 	int* trifacelist;
-	tristatus* tristatus;
+	tristatus* m_tristatus;
 	tethandle* tri2tetlist;
 	int numoftet;
 	int* tetlist;
 	tethandle* neighborlist;
 	unsigned long long* tetmarker;
-	tetstatus* tetstatus;
+	tetstatus* m_tetstatus;
 	tethandle* locatedtet;
 	// cavity
 	int numofthread;

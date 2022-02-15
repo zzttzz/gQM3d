@@ -1,7 +1,7 @@
 #include "InputGenerator.h"
 #include "tetgen.h"
 #include "Experiment.h"
-#include "Experiment_CGAL.h"
+//#include "Experiment_CGAL.h"
 #include "MeshChecker.h"
 //#include "Viewer.h"
 #include "CudaRefine.h"
@@ -16,8 +16,8 @@ main(int argc, char** argv)
 	MESHBH behavior;
 	behavior.radius_to_edge_ratio = 1.4;
 	behavior.minbadtets = 1670000;
-	bool outputmesh = false;
-	bool outputrep = false;
+	bool outputmesh = true;
+	bool outputrep = true;
 
 	// Synthetic
 	if (false)
@@ -73,7 +73,7 @@ main(int argc, char** argv)
 		char* inputpath = "input_real/";
 		char* outputpath = "result_real/";
 
-		char* inputfn = "skull";
+		char* inputfn = "shy";
 		char *inputfile, *outputmeshfile, *outputrepfile;
 
 		std::ostringstream strs;

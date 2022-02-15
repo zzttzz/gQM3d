@@ -22,6 +22,9 @@ list(FILTER SOURCE EXCLUDE REGEX ".*CUDA.*")
 message(STATUS "DEBUG:  src: ${SOURCE}")
 
 add_library(cudalib ${CUDA_SOURCE})
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(cudalib PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-G>)
+endif()
 target_compile_features(cudalib PUBLIC cxx_std_14)
 
 add_executable(testcuda ${SOURCE})
