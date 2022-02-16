@@ -73,7 +73,7 @@ main(int argc, char** argv)
 		char* inputpath = "input_real/";
 		char* outputpath = "result_real/";
 
-		char* inputfn = "shy";
+		char* inputfn = "skull";
 		char *inputfile, *outputmeshfile, *outputrepfile;
 
 		std::ostringstream strs;

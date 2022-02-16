@@ -279,8 +279,8 @@ void GPU_Refine_3D(
 		input_behavior,
 		-1,
 		-1,
-		1, // debug
-		true,
+		0, // debug
+		false,
 		false
 	);
 
